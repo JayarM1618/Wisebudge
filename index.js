@@ -1,9 +1,9 @@
 // Your web app's Firebase configuration
   const firebaseConfig = {
-    aapiKey: "AIzaSyAAwB4t99qRoHNObd8DgI1Jb6rF3sQ31AI",
-    authDomain: "login-with-firebase-database.firebaseapp.com",
-    projectId: "login-with-firebase-database",
-    storageBucket: "login-with-firebase-database.appspot.com",
+   apiKey: "AIzaSyAAwB4t99qRoHNObd8DgI1Jb6rF3sQ31AI",
+    authDomain: "wisebudg-cf3e3.firebaseapp.com",
+    projectId: "wisebudg-cf3e3",
+    storageBucket: "wisebudg-cf3e3.appspot.com",
     messagingSenderId: "410133580370",
     appId: "1:410133580370:web:21036529b6c09127fb2d8b"
   };
@@ -37,8 +37,6 @@ function register () {
     var user_data = {
       email : email,
       full_name : full_name,
-      favourite_song : favourite_song,
-      milk_before_cereal : milk_before_cereal,
       last_login : Date.now()
     }
 
