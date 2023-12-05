@@ -1,17 +1,16 @@
 // Your web app's Firebase configuration
-var firebaseConfig = {
-  apiKey: "",
-  authDomain: "",
-  projectId: "",
-  storageBucket: "",
-  messagingSenderId: "",
-  appId: ""
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-// Initialize variables
-const auth = firebase.auth()
-const database = firebase.database()
+  const firebaseConfig = {
+    aapiKey: "AIzaSyAAwB4t99qRoHNObd8DgI1Jb6rF3sQ31AI",
+    authDomain: "login-with-firebase-database.firebaseapp.com",
+    projectId: "login-with-firebase-database",
+    storageBucket: "login-with-firebase-database.appspot.com",
+    messagingSenderId: "410133580370",
+    appId: "1:410133580370:web:21036529b6c09127fb2d8b"
+  };
+
+  // Initialize Firebase
+  const auth = firebase.auth()
+  const database = firebase.database()
 
 // Set up our register function
 function register () {
@@ -22,17 +21,11 @@ function register () {
   favourite_song = document.getElementById('favourite_song').value
   milk_before_cereal = document.getElementById('milk_before_cereal').value
 
-  // Validate input fields
-  if (validate_email(email) == false || validate_password(password) == false) {
+ if (validate_email(email) == false || validate_password(password) == false) {
     alert('Email or Password is Outta Line!!')
     return
     // Don't continue running the code
   }
-  if (validate_field(full_name) == false || validate_field(favourite_song) == false || validate_field(milk_before_cereal) == false) {
-    alert('One or More Extra Fields is Outta Line!!')
-    return
-  }
- 
   // Move on with Auth
   auth.createUserWithEmailAndPassword(email, password)
   .then(function() {
@@ -107,10 +100,6 @@ function login () {
     alert(error_message)
   })
 }
-
-
-
-
 // Validate Functions
 function validate_email(email) {
   expression = /^[^@]+@\w+(\.\w+)+\w$/
