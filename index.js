@@ -40,7 +40,6 @@ function register () {
       email : email,
       full_name : full_name,
       last_login : Date.now()
-      role: isAdmin ? 'admin' : 'user'
     }
 
     // Push to Firebase Database
