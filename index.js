@@ -21,7 +21,7 @@ function register () {
   full_name = document.getElementById('full_name').value
   
  if (validate_email(email) == false || validate_password(password) == false) {
-    alert('Email or Password is Outta Line!!')
+    alert('Email or Password is invalid')
     return
     // Don't continue running the code
   }
@@ -29,16 +29,17 @@ function register () {
   auth.createUserWithEmailAndPassword(email, password)
   .then(function() {
     // Declare user variable
-    var user = auth.currentUser
+    const user = auth.currentUser
 
     // Add this user to Firebase Database
-    var database_ref = database.ref()
+    const database_ref = database.ref()
 
     // Create User data
-    var user_data = {
+    const user_data = {
       email : email,
       full_name : full_name,
       last_login : Date.now()
+      role: isAdmin ? 'admin' : 'user'
     }
 
     // Push to Firebase Database
@@ -49,8 +50,8 @@ function register () {
   })
   .catch(function(error) {
     // Firebase will use this to alert of its errors
-    var error_code = error.code
-    var error_message = error.message
+    const error_code = error.code
+    const error_message = error.message
 
     alert(error_message)
   })
@@ -59,12 +60,12 @@ function register () {
 // Set up our login function
 function login () {
   // Get all our input fields
-  email = document.getElementById('email').value
-  password = document.getElementById('password').value
+  const email = document.getElementById('email').value
+  const password = document.getElementById('password').value
 
   // Validate input fields
   if (validate_email(email) == false || validate_password(password) == false) {
-    alert('Email or Password is Outta Line!!')
+    alert('Email or Password is invalid!')
     return
     // Don't continue running the code
   }
@@ -72,13 +73,13 @@ function login () {
   auth.signInWithEmailAndPassword(email, password)
   .then(function() {
     // Declare user variable
-    var user = auth.currentUser
+    const user = auth.currentUser
 
     // Add this user to Firebase Database
-    var database_ref = database.ref()
+    const database_ref = database.ref()
 
     // Create User data
-    var user_data = {
+    const user_data = {
       last_login : Date.now()
     }
 
@@ -91,8 +92,8 @@ function login () {
   })
   .catch(function(error) {
     // Firebase will use this to alert of its errors
-    var error_code = error.code
-    var error_message = error.message
+    const error_code = error.code
+    const error_message = error.message
 
     alert(error_message)
   })
