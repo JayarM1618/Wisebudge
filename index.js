@@ -1,4 +1,4 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+//import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
@@ -15,7 +15,7 @@ import "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
   // Initialize Firebase
  const app = initializeApp(firebaseConfig);
-  const auth = firebase.auth()
+  //const auth = firebase.auth()
   const database = firebase.database()
 
 // Set up our register function
