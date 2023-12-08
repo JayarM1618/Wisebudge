@@ -56,8 +56,8 @@
 
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const database = firebase.database();
+    const auth = app.auth();
+    const database = app.database();
     // Set up your register and login functions here
   </script>    
     <!-- Our script must be loaded after firebase references -->
