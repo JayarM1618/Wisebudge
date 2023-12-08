@@ -21,9 +21,9 @@ import "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 // Set up our register function
 function register () {
   // Get all our input fields
-  email = document.getElementById('email').value
-  password = document.getElementById('password').value
-  full_name = document.getElementById('full_name').value
+  email = document.getElementById("email").value
+  password = document.getElementById("password").value
+  full_name = document.getElementById("full_name").value
   
  if (validate_email(email) == false || validate_password(password) == false) {
     alert('Email or Password is invalid')
@@ -32,13 +32,11 @@ function register () {
   }
   // Move on with Auth
   auth.createUserWithEmailAndPassword(email, password)
-  .then(function() {
+  .then(function(userCredential) {
     // Declare user variable
-    const user = auth.currentUser
-
-    // Add this user to Firebase Database
-    const database_ref = database.ref()
-
+    const user = userCredential.user;
+      //auth.currentUser
+    
     // Create User data
     const user_data = {
       email : email,
@@ -47,90 +45,62 @@ function register () {
     }
 
     // Push to Firebase Database
-    database_ref.child('users/' + user.uid).set(user_data)
+    //database_ref.child('users/' + user.uid).set(user_data)
+    database.ref("users/" + user.uid).set(user_data);
 
     // DOne
     alert('User Created!!')
   })
   .catch(function(error) {
     // Firebase will use this to alert of its errors
-    const error_code = error.code
-    const error_message = error.message
-
-    alert(error_message)
+    const errorMessage = error.message;
+    //const error_code = error.code
+    //const error_message = error.message
+      alert(error_message)
   })
 }
 
 // Set up our login function
 function login () {
   // Get all our input fields
-  const email = document.getElementById('email').value
-  const password = document.getElementById('password').value
+  const email = document.getElementById("email").value
+  const password = document.getElementById("password").value
 
   // Validate input fields
-  if (validate_email(email) == false || validate_password(password) == false) {
+  if (validate_email(email) || validate_password(password)) {
     alert('Email or Password is invalid!')
     return
     // Don't continue running the code
   }
 
   auth.signInWithEmailAndPassword(email, password)
-  .then(function() {
+  .then(function(userCredential) {
     // Declare user variable
-    const user = auth.currentUser
+    const user = userCredential.user;
 
     // Add this user to Firebase Database
-    const database_ref = database.ref()
+    database.ref("users/" + user.uid).update({
+        last_login: Date.now(),
+      });
 
-    // Create User data
-    const user_data = {
-      last_login : Date.now()
-    }
-
-    // Push to Firebase Database
-    database_ref.child('users/' + user.uid).update(user_data)
-
-    // DOne
-    alert('User Logged In!!')
-
-  })
-  .catch(function(error) {
-    // Firebase will use this to alert of its errors
-    const error_code = error.code
-    const error_message = error.message
-
-    alert(error_message)
-  })
+      alert("User Logged In!");
+    })
+    .catch(function(error) {
+      const errorMessage = error.message;
+      alert(errorMessage);
+    });
 }
 // Validate Functions
 function validate_email(email) {
-  expression = /^[^@]+@\w+(\.\w+)+\w$/
-  if (expression.test(email) == true) {
-    // Email is good
-    return true
-  } else {
-    // Email is not good
-    return false
-  }
+  const expression = /^[^@]+@\w+(\.\w+)+\w$/;
+  return expression.test(email);
 }
 
 function validate_password(password) {
-  // Firebase only accepts lengths greater than 6
-  if (password < 6) {
-    return false
-  } else {
-    return true
-  }
+  // You can use a stronger validation library like bcryptjs here
+  return password.length >= 6;
 }
 
 function validate_field(field) {
-  if (field == null) {
-    return false
-  }
-
-  if (field.length <= 0) {
-    return false
-  } else {
-    return true
-  }
+  return field !== null && field.length > 0;
 }
