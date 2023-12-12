@@ -1,4 +1,4 @@
-//import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
@@ -13,6 +13,7 @@ import "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
   appId: "1:410133580370:web:21036529b6c09127fb2d8b"
 };
 
+  document.addEventListener('DOMContentLoaded', function() {
   // Initialize Firebase
  const app = initializeApp(firebaseConfig);
   //const auth = firebase.auth()
@@ -20,6 +21,7 @@ import "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 // Set up our register function
 function register () {
+  console.log("Register button clicked");
   // Get all our input fields
   email = document.getElementById("email").value
   password = document.getElementById("password").value
@@ -62,6 +64,7 @@ function register () {
 
 // Set up our login function
 function login () {
+  console.log("Login button clicked");
   // Get all our input fields
   const email = document.getElementById("email").value
   const password = document.getElementById("password").value
