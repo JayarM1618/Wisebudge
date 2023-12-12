@@ -15,8 +15,8 @@ import "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
   document.addEventListener('DOMContentLoaded', function() {
   // Initialize Firebase
- const app = initializeApp(firebaseConfig);
-  //const auth = firebase.auth()
+  const app = initializeApp(firebaseConfig);
+  const auth = firebase.auth()
   const database = firebase.database()
 
 // Set up our register function
