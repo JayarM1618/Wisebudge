@@ -1,28 +1,21 @@
-import { initializeApp } from
- 
-"firebase/app";
-import
- 
-"firebase/auth";
-import
- 
-"firebase/database";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 // Your web app's Firebase configuration
   const firebaseConfig = {
-  apiKey: "AIzaSyAAwB4t99qRoHNObd8DgI1Jb6rF3sQ31AI",
-  authDomain: "wisebudg-cf3e3.firebaseapp.com",
-  databaseURL: "https://wisebudg-cf3e3-default-rtdb.firebaseio.com",
-  projectId: "wisebudg-cf3e3",
-  storageBucket: "wisebudg-cf3e3.appspot.com",
-  messagingSenderId: "410133580370",
-  appId: "1:410133580370:web:21036529b6c09127fb2d8b"
-};
+    apiKey: "AIzaSyAAwB4t99qRoHNObd8DgI1Jb6rF3sQ31AI",
+    authDomain: "wisebudg-cf3e3.firebaseapp.com",
+    databaseURL: "https://wisebudg-cf3e3-default-rtdb.firebaseio.com",
+    projectId: "wisebudg-cf3e3",
+    storageBucket: "wisebudg-cf3e3.appspot.com",
+    messagingSenderId: "410133580370",
+    appId: "1:410133580370:web:21036529b6c09127fb2d8b"
+  };
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-  const auth = app.auth(); // No need to assign "firebase" variable
+  const auth = app.auth();
   const database = app.database();
 
   // Set up our register function
