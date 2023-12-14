@@ -1,6 +1,6 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { initializeApp } from "firebase/app";
+import "firebase/auth";
+import "firebase/database";
 
 // Your web app's Firebase configuration
   const firebaseConfig = {
@@ -16,6 +16,7 @@ import "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
   document.addEventListener('DOMContentLoaded', function() {
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
+  const firebase = app;
   const auth = firebase.auth()
   const database = firebase.database()
 
@@ -23,9 +24,9 @@ import "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 function register () {
   console.log("Register button clicked");
   // Get all our input fields
-  email = document.getElementById("email").value
-  password = document.getElementById("password").value
-  full_name = document.getElementById("full_name").value
+  const email = document.getElementById("email").value
+  const password = document.getElementById("password").value
+  const full_name = document.getElementById("full_name").value
   
  if (validate_email(email) == false || validate_password(password) == false) {
     alert('Email or Password is invalid')
@@ -96,7 +97,7 @@ function login () {
 // Validate Functions
 function validate_email(email) {
   const expression = /^[^@]+@\w+(\.\w+)+\w$/;
-  return expression.test(email);
+  return email !== '' && expression.test(email);
 }
 
 function validate_password(password) {
