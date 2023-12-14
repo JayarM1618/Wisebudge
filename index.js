@@ -13,7 +13,7 @@ import "firebase/database";
   appId: "1:410133580370:web:21036529b6c09127fb2d8b"
 };
 
-  document.addEventListener('DOMContentLoaded', function() {
+ // document.addEventListener('DOMContentLoaded', function() {
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const firebase = app;
@@ -108,3 +108,7 @@ function validate_password(password) {
 function validate_field(field) {
   return field !== null && field.length > 0;
 }
+
+    document.addEventListener('DOMContentLoaded', function () {
+  // Initialization code that only needs to run after the DOM is fully loaded
+});
