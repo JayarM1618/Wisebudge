@@ -107,4 +107,7 @@ const email = document.getElementById("email").value;
   function validate_field(field) {
     return field !== null && field.length > 0;
   }
+
+ document.getElementById("registerBtn").addEventListener("click", register);
+ document.getElementById("loginBtn").addEventListener("click", login);
 });
