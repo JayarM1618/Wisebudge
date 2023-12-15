@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getDatabase } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 // Your web app's Firebase configuration
   const firebaseConfig = {
@@ -16,7 +16,7 @@ import "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 document.addEventListener("DOMContentLoaded", function () {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
-  const database = app.database();
+  const database = getDatabase(app);
 
   // Set up our register function
   function register() {
