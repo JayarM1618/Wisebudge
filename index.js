@@ -47,8 +47,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 };
 
                 // Push to Firebase Database
-                set(ref(database, `users/${user.uid}`), user_data);
+                return set(ref(database, `users/${user.uid}`), user_data);
+               })
 
+              .then(() => {
                 // Done
                 alert("User Created!!");
             })
@@ -74,10 +76,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 const user = userCredential.user;
 
                 // Add this user to Firebase Database
-                update(ref(database, `users/${user.uid}`), {
+               return update(ref(database, `users/${user.uid}`), {
                     last_login: Date.now(),
                 });
-
+              
+               })
+              .then(() => {
                 alert("User Logged In!");
             })
             .catch((error) => {
