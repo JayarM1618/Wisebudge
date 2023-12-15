@@ -18,6 +18,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const auth = getAuth(app);
   const database = getDatabase(app);
 
+   document.getElementById("registerBtn").addEventListener("click", register);
+  document.getElementById("loginBtn").addEventListener("click", login);
+
   // Set up our register function
    function register() {
     console.log("Register button clicked");
@@ -96,7 +99,4 @@ document.addEventListener("DOMContentLoaded", function () {
   function validate_field(field) {
     return field !== null && field.length > 0;
   }
-
-  document.getElementById("registerBtn").addEventListener("click", register);
-  document.getElementById("loginBtn").addEventListener("click", login);
 });
