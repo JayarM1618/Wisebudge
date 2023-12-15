@@ -14,89 +14,89 @@ import { getDatabase } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-
   };
 
 document.addEventListener("DOMContentLoaded", function () {
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const database = getDatabase(app);
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const database = getDatabase(app);
 
-   document.getElementById("registerBtn").addEventListener("click", register);
-  document.getElementById("loginBtn").addEventListener("click", login);
+    document.getElementById("registerBtn").addEventListener("click", register);
+    document.getElementById("loginBtn").addEventListener("click", login);
 
-  // Set up our register function
-   function register() {
-    console.log("Register button clicked");
-    // Get all input fields
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    const full_name = document.getElementById("full_name").value;
+    // Set up our register function
+    function register() {
+        console.log("Register button clicked");
+        // Get all input fields
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const full_name = document.getElementById("full_name").value;
 
-    if (!validate_email(email) || !validate_password(password) || !validate_field(full_name)) {
-      alert("Email, password, or full name is invalid!");
-      return;
+        if (!validate_email(email) || !validate_password(password) || !validate_field(full_name)) {
+            alert("Email, password, or full name is invalid!");
+            return;
+        }
+
+        // Move on with auth
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+
+                // Create User data
+                const user_data = {
+                    email,
+                    full_name,
+                    last_login: Date.now(),
+                };
+
+                // Push to Firebase Database
+                set(ref(database, `users/${user.uid}`), user_data);
+
+                // Done
+                alert("User Created!!");
+            })
+            .catch((error) => {
+                alert(error.message);
+            });
     }
 
-    // Move on with auth
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
+    // Set up our login function
+    function login() {
+        console.log("Login button clicked");
+        // Get all input fields
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
 
-        // Create User data
-        const user_data = {
-          email,
-          full_name,
-          last_login: Date.now(),
-        };
+        if (!validate_email(email) || !validate_password(password)) {
+            alert("Email or password is invalid!");
+            return;
+        }
 
-        // Push to Firebase Database
-        database.ref(`users/${user.uid}`).set(user_data);
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
 
-        // Done
-        alert("User Created!!");
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
-  }
+                // Add this user to Firebase Database
+                update(ref(database, `users/${user.uid}`), {
+                    last_login: Date.now(),
+                });
 
-  // Set up our login function
-  function login() {
-    console.log("Login button clicked");
-    // Get all input fields
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-
-    if (!validate_email(email) || !validate_password(password)) {
-      alert("Email or password is invalid!");
-      return;
+                alert("User Logged In!");
+            })
+            .catch((error) => {
+                alert(error.message);
+            });
     }
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
+    // Validate Functions
+    function validate_email(email) {
+        const expression = /^[^@]+@\w+(\.\w+)+\w$/;
+        return email !== "" && expression.test(email);
+    }
 
-        // Add this user to Firebase Database
-        database.ref(`users/${user.uid}`).update({
-          last_login: Date.now(),
-        });
+    function validate_password(password) {
+        // Consider using a stronger validation library like bcryptjs here
+        return password.length >= 6;
+    }
 
-        alert("User Logged In!");
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
-  }
-
-  // Validate Functions
-  function validate_email(email) {
-    const expression = /^[^@]+@\w+(\.\w+)+\w$/;
-    return email !== "" && expression.test(email);
-  }
-
-  function validate_password(password) {
-    // Consider using a stronger validation library like bcryptjs here
-    return password.length >= 6;
-  }
-
-  function validate_field(field) {
-    return field !== null && field.length > 0;
-  }
+    function validate_field(field) {
+        return field !== null && field.length > 0;
+    }
 });
