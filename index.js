@@ -13,7 +13,7 @@ import { getDatabase } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-
     appId: "1:410133580370:web:21036529b6c09127fb2d8b"
   };
 
-ocument.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const database = getDatabase(app);  // Use getDatabase to initialize the database
