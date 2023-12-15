@@ -19,12 +19,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const database = getDatabase(app);
 
   // Set up our register function
-  function register() {
+   function register() {
     console.log("Register button clicked");
     // Get all input fields
-
-    
-const email = document.getElementById("email").value;
+    const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     const full_name = document.getElementById("full_name").value;
 
@@ -34,8 +32,7 @@ const email = document.getElementById("email").value;
     }
 
     // Move on with auth
-    auth
-      .createUserWithEmailAndPassword(email, password)
+    createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
 
@@ -69,8 +66,7 @@ const email = document.getElementById("email").value;
       return;
     }
 
-    auth
-      .signInWithEmailAndPassword(email, password)
+    signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
 
@@ -101,6 +97,6 @@ const email = document.getElementById("email").value;
     return field !== null && field.length > 0;
   }
 
- document.getElementById("registerBtn").addEventListener("click", register);
- document.getElementById("loginBtn").addEventListener("click", login);
+  document.getElementById("registerBtn").addEventListener("click", register);
+  document.getElementById("loginBtn").addEventListener("click", login);
 });
